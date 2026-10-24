@@ -1,0 +1,114 @@
+@import "tailwindcss";
+
+:root {
+  --bg: #0a0a0b;
+  --surface: #111113;
+  --surface-2: #18181b;
+  --line: #222226;
+  --line-strong: #303036;
+  --muted: #8a8a93;
+  --foreground: #ececee;
+  --accent: #7c5cfc;
+  --accent-hover: #8d71fd;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-muted: var(--muted);
+  --color-foreground: var(--foreground);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+html {
+  color-scheme: dark;
+}
+
+body {
+  background: var(--bg);
+  color: var(--foreground);
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  font-size: 14px;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: rgb(124 92 252 / 0.35);
+}
+
+@layer components {
+  .btn-primary,
+  .btn-secondary,
+  .btn-ghost,
+  .btn-danger {
+    @apply inline-flex h-8 shrink-0 items-center justify-center gap-1.5 whitespace-nowrap rounded-md px-3 text-[13px] font-medium transition-colors outline-none focus-visible:ring-2 focus-visible:ring-accent/50 disabled:pointer-events-none disabled:opacity-50;
+  }
+  .btn-primary {
+    @apply bg-accent text-white shadow-[inset_0_1px_0_rgb(255_255_255/0.16),0_1px_2px_rgb(0_0_0/0.4)] hover:bg-accent-hover;
+  }
+  .btn-secondary {
+    @apply border border-line bg-surface-2 text-zinc-200 shadow-[0_1px_2px_rgb(0_0_0/0.3)] hover:border-line-strong hover:bg-[#1d1d21];
+  }
+  .btn-ghost {
+    @apply text-muted hover:bg-white/[0.05] hover:text-zinc-100;
+  }
+  .btn-danger {
+    @apply border border-line bg-surface-2 text-red-400 hover:border-red-500/40 hover:bg-red-500/[0.08];
+  }
+  /* Size modifiers come after the variants so they override the default size. */
+  .btn-lg {
+    @apply h-9 px-4 text-sm;
+  }
+  .btn-icon {
+    @apply w-8 px-0;
+  }
+
+  .input {
+    @apply h-9 w-full rounded-md border border-line bg-bg px-3 text-[13px] text-zinc-100 outline-none transition-[border-color,box-shadow] placeholder:text-zinc-600 hover:border-line-strong focus:border-accent focus:ring-[3px] focus:ring-accent/15;
+  }
+  .field-label {
+    @apply mb-1.5 block text-[13px] font-medium text-zinc-300;
+  }
+
+  .card {
+    @apply rounded-lg border border-line bg-surface;
+  }
+  .card-header {
+    @apply flex h-12 items-center justify-between gap-3 border-b border-line px-4;
+  }
+  .card-title {
+    @apply text-[13px] font-medium text-zinc-200;
+  }
+
+  .th {
+    @apply h-9 px-4 text-left text-xs font-medium text-muted;
+  }
+  .td {
+    @apply px-4 py-2.5 align-middle;
+  }
+
+  .kbd {
+    @apply inline-flex h-5 min-w-5 items-center justify-center rounded border border-line-strong bg-surface-2 px-1 font-mono text-[11px] text-muted;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(2px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.2s ease-out both;
+}
